@@ -1,0 +1,316 @@
+/* --- CONTENEDOR PRINCIPAL --- */ 
+.timeline {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+/* --- LÍNEA CENTRAL --- */
+.timeline-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 165, 0, 0.2);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  background: orange;
+  transform: translateX(-50%);
+  height: 0;
+  border-radius: 2px;
+  transition: height 0.2s ease-out;
+  z-index: 2;
+}
+
+/* --- ITEMS --- */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 40px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease-out;
+}
+
+/* --- ALTERNANCIA --- */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* --- CAJAS DE TEXTO --- */
+.timeline-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  padding: 25px 30px;
+  backdrop-filter: blur(6px);
+  max-width: 420px;
+  display: inline-block;
+}
+
+.timeline-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0;
+}
+
+.timeline-subtitle {
+  color: orange;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.timeline-box p {
+  color: #ddd;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.timeline-img img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+/* --- ANIMACIÓN DE APARICIÓN --- */
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 769px) {
+  .timeline-item{
+    opacity: 1;          /* visibles siempre */
+    pointer-events: auto;
+    transform: none;     /* opcional: evita saltos */
+  }
+
+  .timeline-item.left {
+    left: 0;
+    text-align: right;
+    padding-right: 8%;
+  }
+
+  .timeline-item.right {
+    left: 50%;
+    text-align: left;
+    padding-left: 8%;
+  }
+
+  .timeline-box {
+    display: inline-block;
+    text-align: inherit;
+    max-width: 400px;
+  }
+}
+
+
+/* --- VERSIÓN MÓVIL --- */
+@media (max-width: 768px) {
+  .timeline-line,
+  .timeline-progress {
+    left: 10%;
+  }
+
+  .timeline-item {
+    width: 100%;
+    text-align: left;
+    padding: 30px 20px;
+    transform: translateY(40px);
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+    text-align: left;
+    padding-left: 20%;
+  }
+
+  .timeline-box {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .timeline-img img {
+    display: block;
+    margin: 15px auto 0;
+    max-width: 90%;
+  }
+}
+/* --- INTRO TIMELINE (antes de los problemas) --- */
+.timeline-intro{
+  position: relative;
+  z-index: 3;                 /* por encima de la línea */
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(18px);
+  animation: introIn 0.9s ease-out forwards;
+}
+
+.timeline-intro-kicker{
+  color: orange;
+  font-weight: 800;
+  letter-spacing: .4px;
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+}
+
+.timeline-intro-title{
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  margin: 0 0 12px;
+  font-weight: 800;
+}
+
+.timeline-intro-text{
+  color: #ddd;
+  font-size: clamp(1rem, 1.4vw, 1.05rem);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@keyframes introIn{
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajuste móvil: como tu línea se va al 10%, alinea la intro con el contenido */
+@media (max-width: 768px){
+  .timeline-intro{
+    text-align: left;
+    padding-left: 20%;  /* igual que tus items en móvil */
+    padding-right: 20px;
+    max-width: 100%;
+  }
+}
+.timeline-intro{
+  margin: 120px auto 80px; /* MÁS aire arriba y abajo */
+}
+
+/* --- FONDO SOLO PARA EL TIMELINE --- */
+.timeline{
+  background-image: url("../texturas/dark-mosaic.png");
+  background-repeat: repeat;
+  background-size: auto;
+  border-radius: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.timeline{
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: url("../texturas/dark-mosaic.png");
+  background-repeat: repeat;
+  opacity: 0.35; /* ajusta 0.2 - 0.5 */
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* Mantén la textura detrás sin romper posiciones */
+.timeline{ position: relative; overflow: hidden; }
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: url("../texturas/dark-mosaic.png");
+  background-repeat: repeat;
+  opacity: 0.35;
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* Asegura que la línea y el contenido queden encima */
+.timeline-line{ z-index: 1; }
+.timeline-progress{ z-index: 2; }
+.timeline-item{ z-index: 3; }
+/* --- EXPANDIR TIMELINE EN PC --- */
+@media (min-width: 992px){
+  .timeline-bg .timeline{
+    max-width: 1400px;      /* antes 1100 */
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .timeline-box{
+    max-width: 560px;       /* antes 420 */
+  }
+
+  /* más espacio entre línea y cajas */
+  .timeline-item.left{ padding-right: 10%; }
+  .timeline-item.right{ padding-left: 10%; }
+}
+/* ===== MODO ULTRA ANCHO EN PC ===== */
+@media (min-width: 992px){
+  /* el fondo ocupa todo, el contenido casi todo el ancho */
+  .timeline-bg .timeline{
+    max-width: 95vw;        /* ocupa casi toda la pantalla */
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  /* acerca las tarjetas a los bordes */
+  .timeline-item{
+    padding: 40px 10px;     /* menos padding lateral */
+  }
+
+  /* tarjetas más grandes */
+  .timeline-box{
+    max-width: 700px;       /* más ancha */
+  }
+
+  /* empuja más hacia los extremos */
+  .timeline-item.left{ padding-right: 14%; }
+  .timeline-item.right{ padding-left: 14%; }
+}
+
+/* pantallas enormes: aún más */
+@media (min-width: 1400px){
+  .timeline-bg .timeline{
+    max-width: 98vw;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  .timeline-box{ max-width: 760px; }
+  .timeline-item.left{ padding-right: 16%; }
+  .timeline-item.right{ padding-left: 16%; }
+}
+/* Quita el hueco blanco al final del Timeline */
+.timeline-bg{
+  padding-bottom: 0 !important;
+}
+
+/* Si tu timeline necesita un poquito de aire, usa 30px, no 100 */
+@media (min-width: 992px){
+  .timeline-bg{ padding-bottom: 30px !important; }
+}
